@@ -1,0 +1,19 @@
+@startuml
+
+object LoginPage
+
+LoginPage->AuthorizationSerivceAPI: RegistrationRequest
+
+AuthorizationSerivceAPI->SQLite: Save information about user
+
+AuthorizationSerivceAPI->LoginPage: Response status about process registration
+
+LoginPage-->ClustersListPage: Swap
+ClustersListPage->DatabaseManagerServiceAPI: GetClusterRequest
+DatabaseManagerServiceAPI->ClustersListPage: ClustersListResponse
+
+ClustersListPage->DatabaseInfoPage: Swap
+DatabaseInfoPage->DatabaseManagerServiceAPI: GetInfoDatabase
+
+DatabaseManagerServiceAPI->DatabaseInfoPage: DatabaseInfoResponse
+@enduml
