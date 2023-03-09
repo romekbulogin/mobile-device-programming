@@ -21,12 +21,19 @@ import android.widget.Button
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_second.view.*
+import ru.edu.myapplication.adapter.DatabaseAdapter
 import ru.edu.myapplication.databinding.ActivityMainBinding
+import ru.edu.myapplication.dto.Database
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var databaseAdapter: DatabaseAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,16 +43,16 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        val button = findViewById<Button>(R.id.button_auth)
         createDialog()
 
         createNotificationChannel()
 
-        var builder = NotificationCompat.Builder(this, "channelId")
+        val builder = NotificationCompat.Builder(this, "channelId")
         builder.apply {
             setSmallIcon(R.drawable.ic_launcher_foreground)
             setContentTitle("Test")
